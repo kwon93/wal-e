@@ -1,0 +1,54 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.5.6'
+    id 'io.spring.dependency-management' version '1.1.7'
+}
+
+group = 'com'
+version = '0.0.1-SNAPSHOT'
+description = 'wal-e'
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    //web
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+
+    //testing
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+    //lombok
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
+    //postgresql driver
+    runtimeOnly 'org.postgresql:postgresql'
+
+    //spring data jpa command 작업
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    //jooq query 작업
+    implementation 'org.springframework.boot:spring-boot-starter-jooq'
+
+    //flyway migration
+    implementation 'org.flywaydb:flyway-core'
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}
