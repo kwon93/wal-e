@@ -12,6 +12,7 @@ CREATE TABLE wal_transaction (
 );
 
 -- 작업 테이블
+-- wal_transaction 테이블과 1:N 관계
 CREATE TABLE wal_operation (
     id BIGSERIAL PRIMARY KEY,
     transaction_id BIGINT NOT NULL REFERENCES wal_transaction(id) ON DELETE CASCADE,
